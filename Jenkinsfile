@@ -1,5 +1,9 @@
 pipeline {
     agent { label 'JDK_8' }
+    parameters
+    {
+        choice (name: 'GOAL' , choices: ['validate', 'compile', 'build', 'deploy', 'package','clean install', 'clean package'], description: 'pick any one of the goals')
+    }
     options
     {
         retry(3)
@@ -15,7 +19,7 @@ pipeline {
     }
     stages
     {
-        stage('git') 
+        stage('vcs') 
         {
             steps 
             {
@@ -24,11 +28,11 @@ pipeline {
                    
             }     
         }
-        stage('build')
+        stage('build and package')
         {
             steps
             {
-               sh 'export PATH="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin:$PATH" && mvn package'
+               sh script: "mvn ${params.GOAL}"
             }
         }
         stage('reporting')
