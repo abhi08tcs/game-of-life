@@ -19,7 +19,8 @@ pipeline {
         {
             steps 
             {
-                git credentialsId: 'GOF', url: 'https://github.com/abhi08tcs/game-of-life.git'
+                git url: 'https://github.com/abhi08tcs/game-of-life.git',
+                    branch: 'develop'
                    
             }     
         }
