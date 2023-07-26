@@ -43,13 +43,13 @@ pipeline {
     }
     post {
         success {
-            mail subject: 'build and package',
-                 body: 'your project is effective and your project is running on the node ${NODE_NAME} and the build id is ${BUILD_ID} , and the job is ${JOB_NAME}',
+            mail subject: "build and package",
+                 body: "your project is effective and your project is running on the node ${NODE_NAME} and the build id is ${BUILD_ID} , and the job is ${JOB_NAME}",
                  to: 'all@qt.com'
         }
         failure {
-            mail subject: 'build and package',
-                 body: 'your project is defective and your project is running on the node ${NODE_NAME} and the build id is ${BUILD_ID} , and the job is ${JOB_NAME}',
+            mail subject: "build and package",
+                 body: "your project is defective and your project is running on the node ${NODE_NAME} and the build id is ${BUILD_ID} , and the job is ${JOB_NAME}",
                  to: 'all@qt.com'
         }
     }
