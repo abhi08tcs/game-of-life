@@ -1,9 +1,9 @@
 pipeline {
     agent { label 'JDK_8' }
-    //parameters
-    //{
-      //  choice (name: 'GOAL' , choices: ['validate', 'compile', 'build', 'deploy', 'package','clean install', 'clean package'], description: 'pick any one of the goals')
-    //}
+    parameters
+    {
+        choice (name: 'GOAL' , choices: ['validate', 'compile', 'build', 'deploy', 'package','clean install', 'clean package'], description: 'pick any one of the goals')
+    }
     options
     {
         retry(3)
@@ -32,25 +32,9 @@ pipeline {
         {
             steps
             {
-               //direct build with maven 
-               //sh script: "mvn ${params.GOAL}"
-
-               //configuring with jfrog
-               rtMavenDeployer(
-                id: "gol_deployer",
-                serverId: "MY_JFROG",
-                releaseRepo: 'learning-libs-release-local',
-                snapshotRepo: 'learning-libs-snapshot-local'
-               ) 
-               rtMavenRun(
-                tool: 'MAVEN_GOF',
-                pom: 'pom.xml',
-                goals: 'clean install'
-                deployerId: "gol_deployer"
-               )
-               rtPublishBuildInfo (
-                    serverId: "MY_JFROG"
-                )
+                
+               sh script: "mvn ${params.GOAL}"
+ 
             }
         }
         stage('reporting')
@@ -58,12 +42,12 @@ pipeline {
             steps
             {
                junit '**/target/surefire-reports/TEST-*.xml'
-             
+               archiveArtifacts artifacts: '**/gameoflife.war', followSymlinks: false
                
             }
         }
     }
-   /* post {
+    post {
         success {
             mail subject: "build and package",
                  body: "your project is effective and your project is running on the node ${NODE_NAME} and the build id is ${BUILD_ID} , and the job is ${JOB_NAME}",
@@ -74,5 +58,5 @@ pipeline {
                  body: "your project is defective and your project is running on the node ${NODE_NAME} and the build id is ${BUILD_ID} , and the job is ${JOB_NAME}",
                  to: 'all@qt.com'
         }
-    }*/
+    }
 }
