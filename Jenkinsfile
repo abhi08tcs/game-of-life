@@ -36,7 +36,7 @@ pipeline {
                // to run the script directly
                //sh script: "mvn ${params.GOAL}"
 
-              to run from JFROG artifactory
+              //to run from JFROG artifactory
               rtMavenDeployer(
                 id: 'GOL_DEPLOYER',
                 serverId: 'MY_JFROG',
