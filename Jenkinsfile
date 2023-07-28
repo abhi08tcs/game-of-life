@@ -34,9 +34,9 @@ pipeline {
             {
                 
                // to run the script directly
-               //sh script: "mvn ${params.GOAL}"
+               sh script: "mvn ${params.GOAL}"
 
-              //to run from JFROG artifactory
+              /*to run from JFROG artifactory
               rtMavenDeployer(
                 id: 'GOL_DEPLOYER',
                 serverId: 'MY_JFROG',
@@ -46,12 +46,12 @@ pipeline {
               rtMavenRun(
                 tool: 'MAVEN_GOF',
                 pom: 'pom.xml',
-                goals: 'export PATH="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin:$PATH" && mvn ${params.GOAL}',
+                goals: 'mvn ${params.GOAL}',
                 deployerId: 'GOL_DEPLOYER'
               )
               rtPublishBuildInfo(
                 serverId: 'MY_JFROG'
-              )
+              )*/
  
             }
         }
@@ -60,7 +60,7 @@ pipeline {
             steps
             {
                junit testResults: '**/target/surefire-reports/TEST-*.xml'
-               //archiveArtifacts artifacts: '**/gameoflife.war', followSymlinks: false
+               archiveArtifacts artifacts: '**/gameoflife.war', followSymlinks: false
                
             }
         }
