@@ -34,14 +34,14 @@ pipeline {
             {
                 
                // to run the script directly
-               sh script: "mvn ${params.GOAL}"
+               //sh script: "mvn ${params.GOAL}"
 
-              /*to run from JFROG artifactory
+              to run from JFROG artifactory
               rtMavenDeployer(
                 id: 'GOL_DEPLOYER',
                 serverId: 'MY_JFROG',
-                releaseRepo: 'learning-libs-release-repo',
-                snapshotRepo: 'learning-libs-snapshot-repo'
+                releaseRepo: 'learning-libs-release-local',
+                snapshotRepo: 'learning-libs-snapshot-local'
               )
               rtMavenRun(
                 tool: 'MAVEN_GOF',
@@ -51,7 +51,7 @@ pipeline {
               )
               rtPublishBuildInfo(
                 serverId: 'MY_JFROG'
-              )*/
+              )
  
             }
         }
@@ -59,8 +59,8 @@ pipeline {
         {
             steps
             {
-               junit '**/target/surefire-reports/TEST-*.xml'
-               archiveArtifacts artifacts: '**/gameoflife.war', followSymlinks: false
+               junit testResults: '**/target/surefire-reports/TEST-*.xml'
+               //archiveArtifacts artifacts: '**/gameoflife.war', followSymlinks: false
                
             }
         }
