@@ -39,18 +39,18 @@ pipeline {
               //to run from JFROG artifactory
               rtMavenDeployer(
                 id: 'GOL_DEPLOYER',
-                serverId: "MY_JFROG",
+                serverId: 'MY_JFROG',
                 releaseRepo: 'learning-libs-release-repo',
                 snapshotRepo: 'learning-libs-snapshot-repo'
               )
               rtMavenRun(
                 tool: 'MAVEN_GOF',
                 pom: 'pom.xml',
-                goals: 'export PATH="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin:$PATH" && mvn package',
+                goals: 'clean install',
                 deployerId: 'GOL_DEPLOYER'
               )
               rtPublishBuildInfo(
-                serverId: "MY_JFROG"
+                serverId: 'MY_JFROG'
               )
  
             }
