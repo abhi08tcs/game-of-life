@@ -1,9 +1,9 @@
 pipeline {
     agent { label 'JDK_8' }
-    parameters
+   /* parameters
     {
         choice (name: 'GOAL' , choices: ['validate', 'compile', 'build', 'deploy', 'package','clean install', 'clean package'], description: 'pick any one of the goals')
-    }
+    }*/
     options
     {
         retry(3)
@@ -46,7 +46,7 @@ pipeline {
               rtMavenRun(
                 tool: 'MAVEN_GOF',
                 pom: 'pom.xml',
-                goals: 'export PATH="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin:$PATH" && mvn ${params.GOAL}',
+                goals: 'export PATH="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin:$PATH" && mvn package',
                 deployerId: 'GOL_DEPLOYER'
               )
               rtPublishBuildInfo(
