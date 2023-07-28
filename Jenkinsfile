@@ -38,7 +38,7 @@ pipeline {
               //to run from JFROG artifactory
               rtMavenDeployer(
                 id: 'GOL_DEPLOYER'
-                serverId: 'MY_JFROG'
+                serverId: "MY_JFROG"
                 releaserepo: 'learning-libs-release-repo'
                 snapshotRepo: 'learning-libs-snapshot-repo'
               )
@@ -49,7 +49,7 @@ pipeline {
                 deployerId: 'GOL_DEPLOYER'
               )
               rtPublishBuildInfo(
-                serverId: 'MY_FROG'
+                serverId: "MY_JFROG"
               )
  
             }
