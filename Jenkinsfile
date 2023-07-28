@@ -40,7 +40,7 @@ pipeline {
               rtMavenDeployer(
                 id: 'GOL_DEPLOYER',
                 serverId: "MY_JFROG",
-                releaserepo: 'learning-libs-release-repo',
+                releaseRepo: 'learning-libs-release-repo',
                 snapshotRepo: 'learning-libs-snapshot-repo'
               )
               rtMavenRun(
