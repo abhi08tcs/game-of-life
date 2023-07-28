@@ -46,7 +46,7 @@ pipeline {
               rtMavenRun(
                 tool: 'MAVEN_GOF',
                 pom: 'pom.xml',
-                goals: 'export PATH="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin:$PATH && mvn ${params.GOAL}'',
+                goals: 'export PATH="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin:$PATH" && mvn ${params.GOAL}',
                 deployerId: 'GOL_DEPLOYER'
               )
               rtPublishBuildInfo(
